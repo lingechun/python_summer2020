@@ -194,7 +194,7 @@ for friend_id in all_friends:
 active_friend_id = max(tweets_ids, key=tweets_ids.get)
 active_friend = api.get_user(active_friend_id)
 print(active_friend.id, active_friend.name, active_friend.screen_name)
-
+## 18701550 El Yunke Obeezy MissAir
 
 
 
