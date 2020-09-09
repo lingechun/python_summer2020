@@ -1,5 +1,34 @@
 # Gechun's HW3 solution
 
+####################
+##     Answers    ##
+####################
+# 1(1) The most active follower of @WUSTLPoliSci is:
+# 810933338 十勝餡粒々@アメリカPh.D.リベンジ @tubuann_only
+
+# 1(2) The most popular follower of @WUSTLPoliSci is:
+# 84653850 Brendan Nyhan @BrendanNyhan 
+
+# 1(3) The most active layman friend of @WUSTLPoliSci is:
+# 764260766 usman falalu @usmanfalalu1
+#      The most active expert friend of @WUSTLPoliSci is:
+# 1064533471 Tim... we're doomed @prof_nokken
+#      The most active celebrity friend of @WUSTLPoliSci is:
+# 807095 The New York Times @nytimes
+
+# 1(4) The most popular friend of @WUSTLPoliSci is:
+# 813286 Barack Obama @BarackObama
+
+# 2(1) The most active (layman and expert) one among followers and followers' followers:
+# 458785593 Corporación GES @CorporacionGES
+
+# 2(2) The most active (layman and expert) one among friends and friends' friends:
+# 18701550 El Yunke Obeezy @MissAir
+
+
+
+
+
 import importlib 
 import sys
 import tweepy 
