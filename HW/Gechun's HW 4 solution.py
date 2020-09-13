@@ -21,76 +21,71 @@ def selection_sort(numbers):
 
 
 ###############################################################################
-# Heap sort has a time complexity of O(n log n) (Find online)
-def heapify(arr, n, i): 
+# Heap sort has a time complexity of O(n log n) (Find online: https://www.programiz.com/dsa/heap-sort)
+def heapify(numbers, n, i): 
     largest = i # set largest as root
-    l = 2 * i + 1     # left = 2*i + 1 
-    r = 2 * i + 2     # right = 2*i + 2 
+    left = 2 * i + 1     # left = 2*i + 1 
+    right = 2 * i + 2     # right = 2*i + 2 
   
-    # See if left child of root exists and is 
-    # greater than root 
-    if (l < n and arr[i] < arr[l]): 
-        largest = l 
+    # See if left child of root exists and is greater than root 
+    if (left < n and numbers[i] < numbers[left]): 
+        largest = left 
   
-    # See if right child of root exists and is 
-    # greater than root 
-    if (r < n and arr[largest] < arr[r]): 
-        largest = r 
+    # See if right child of root exists and is greater than root 
+    if (right < n and numbers[largest] < numbers[right]): 
+        largest = right 
   
     # Change root, if needed 
     if (largest != i): 
-        arr[i],arr[largest] = arr[largest],arr[i] # swap 
+        numbers[i],numbers[largest] = numbers[largest],numbers[i] # swap 
         # Heapify the root. 
-        heapify(arr, n, largest) 
+        heapify(numbers, n, largest) 
   
 # function to sort an array of given size 
-def heapSort(arr): 
-    n = len(arr) 
-    # Build a heap. 
+def heapSort(numbers): 
+    n = len(numbers) 
+    # Build a heap
     for i in range(n, -1, -1): 
-        heapify(arr, n, i) 
+        heapify(numbers, n, i) 
   
     # One by one extract elements 
     for i in range(n-1, 0, -1): 
-        arr[i], arr[0] = arr[0], arr[i] # swap 
-        heapify(arr, i, 0)
-    return arr 
+        numbers[i], numbers[0] = numbers[0], numbers[i] # swap 
+        heapify(numbers, i, 0)
+    return numbers
 
 
 
 ###############################################################################
-# Quick sort (Find online)
-def partition(arr, low, high):
-    i = (low-1)         # index of smaller element
-    pivot = arr[high]     # pivot
+# Quick sort (Find online: https://www.geeksforgeeks.org/python-program-for-quicksort/)
+
+def partition(numbers, first, last):
+    i = (first-1)         # index of first element
+    pivot = numbers[last]     # pick the last element as pivot
  
-    for j in range(low, high):
+    for j in range(first, last):
  
-        # If current element is smaller than or
-        # equal to pivot
-        if arr[j] <= pivot: 
+        # If current element is smaller than or equal to pivot
+        if numbers[j] <= pivot: 
             # increment index of smaller element
             i = i+1
-            arr[i], arr[j] = arr[j], arr[i]
+            numbers[i], numbers[j] = numbers[j], numbers[i]
  
-    arr[i+1], arr[high] = arr[high], arr[i+1]
+    numbers[i+1], numbers[last] = numbers[last], numbers[i+1]
     return (i+1)
 
-def quickSort(arr, low, high):
-    if len(arr) == 1:
-        return arr
-    if low < high:
+def quickSort(numbers, first, last):
+    if len(numbers) == 1:
+        return numbers
+    if first < last:
  
-        # pi is partitioning index, arr[p] is now
-        # at right place
-        pi = partition(arr, low, high)
+        # pi is partitioning index, numbers[p] is now at right place
+        pi = partition(numbers, first, last)
  
-        # Separately sort elements before
-        # partition and after partition
-        quickSort(arr, low, pi-1)
-        quickSort(arr, pi+1, high)
-        return arr
-
+        # Separately sort elements before partition and after partition
+        quickSort(numbers, first, pi-1)
+        quickSort(numbers, pi+1, last)
+        return numbers
 
 
 ###############################################################################
