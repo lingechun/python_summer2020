@@ -27,11 +27,14 @@ class LinkedList:
 		addnode = Node(_value = new_value)
 		afternode = self.head # find the afternode from the head of the list
 		# There are two situations that we can't find the afternode
-		if afternode == None: # (1)the list is empty
-			print('The list is empty and the after_node is not in the list.')
+		if self.head == None: # (1)the list is empty
+			print('The list is empty.')
+		elif self.head.value == after_node.value:
+			addnode.next = self.head.next
+			self.head.next = addnode
 		else:
 			try:
-			    while(afternode.value != after_node):
+			    while(afternode.value != after_node.value):
 				    afternode = afternode.next
 				addnode.next = afternode.next
 			    afternode.next = addnode
@@ -43,11 +46,15 @@ class LinkedList:
     	addnode = Node(_value = new_value)
 		onebeforenode = self.head # find the node before beforenode from the head of the list
 		# There are two situations that we can't find the one before beforenode
-		if onebeforenode == None: # (1)the list is empty
-			print('The list is empty and the before_node is not in the list.')
+		if self.head == None: # (1)the list is empty
+			print('The list is empty.')
+		elif self.head.value == before_node.value:
+			head = self.head
+			self.head = addnode
+			addnode.next = head	
 		else:
 			try:
-			    while(onebeforenode.next.value != before_node):
+			    while(onebeforenode.next.value != before_node.value):
 				    onebeforenode = onebeforenode.next
 				addnode.next = onebeforenode.next
 			    onebeforenode.next = addnode
@@ -60,7 +67,7 @@ class LinkedList:
     	onebefore_removenode = self.head # find the node before removenode from the head of the list
     	# There are two situations that we can't find the one before removenode
     	if onebefore_removenode == None: #(1) the list is empty
-    	    print('The list is empty and the node_to_remove is not in the list.')
+    	    print('The list is empty.')
     	else:
     		try: 
     			while(onebefore_removenode.next.value != node_to_remove.value):
@@ -70,17 +77,37 @@ class LinkedList:
     			onebefore_removenode.next = oneafter_removenode
     		except AttributeError: #(2)the removenode does not exist in the list
     		    print('The list is not empty and the node_to_remove is not in the list.')
+    
+    def removeNodesByValue(self, value):	
+    	removenode = self.head
+    	# check if the list is empty
+    	if self.head == None:
+    		print('The list is empty.')
+    	else:
+    	    try:
+    	        while(removenode.value != value): # find the nodes to remove until the end of the list
+    		        removenode = removenode.next # go to next one if this one does not have the specified value
+    		        if removenode.value == value: 
+    		            if removenode.next == None: # make sure if it is the last node in the list
+    		        	    removenode.value == None # if is the last node, just remove it and end the function
+    		        	    break
+    		            else:
+    			            nextone = removenode.next # if it is not the last node
+    	                    removenode.value = nextone.value # remove the node and continue to check next one
+    	                    removenode.next = nextone.next
+            except AttributeError: # check whether has nodes with the specified value
+        	    print('The list is not empty and there is no nodes with the specified value in the list.')
 
     
     def reverse(self):
     	onebefore = None
-    	thisone = self.head
+    	thisone = self.head # start from the first node of the list
     	while(thisone != None):
-    		oneafter = thisone.next
-    		thisone.next = onebefore
-    		onebefore = thisone
-    		thisone = oneafter
-    	self.head = onebefore
+    		oneafter = thisone.next # get the node after the current node
+    		thisone.next = onebefore # exchange the position of the current node with the node before the current node
+    		onebefore = thisone # store the nodes that have been reversed
+    		thisone = oneafter # go the next node until finished the whole reversion 
+    	self.head = onebefore # pass all reversed nodes to the head
         
 			 	
 	def length(self):
@@ -94,49 +121,49 @@ class LinkedList:
 				count = count + 1
 	    print(count)
 
-	def print(self):
+	def print(self): # instead of having a str(self), I use print method to display the list
 		last = self.head 
 		while(last != None):
 			print(last.value) # print the nodes in this list one by one
 			last = last.next
 
 
+
 list = LinkedList()
 # add some new nodes to the end of the list 
-list.addNode(1)
 list.addNode(2)
-list.addNode(5)
+list.addNode(3)
+list.addNode(6)
 # check incorrect insertion
-list.addNodeAfter(3, 10) 
-list.addNodeBefore(4, 15)
+list.addNodeAfter(1, Node(10)) 
+list.addNodeBefore(4, Node(15))
 # add correct insertion
-list.addNodeAfter(3, 2)
-list.addNodeBefore(4, 5)
+list.addNodeBefore(0, Node(2))
+list.addNodeAfter(1, Node(0))
+list.addNodeAfter(4, Node(3))
+list.addNodeBefore(5, Node(6))
+list.addNodeBefore(5, Node(6))
 # remove node that does not exist
-list.removeNode(Node(6))
+list.removeNode(Node(7))
 # remove a existing node
-list.removeNode(Node(4))
+list.removeNode(Node(3))
+# remove node that does not exist
+list.removeNodesByValue(9)
+
+# Seem only can remove one node with the specified value
+# Please help: don't understand why the while-if loop does not work properly
+list.removeNodesByValue(5)
+
 # reverse the whole list
 list.reverse()
 # display the list
 list.print()
 # calculate the length of the list
 list.length()
-list.removeNodesByValue(3)
 
 
-
-def removeNodesByValue(self, value):	
-    	onebefore_removenode = self.head
-    	if onebefore_removenode == value:
-
-    	if onebefore_removenode.next.value == value
-        while(onebefore_removenode.next.value != value):
-    		onebefore_removenode = onebefore_removenode.next
-    	removenode = onebefore_removenode.next
-    	oneafter_removenode = removenode.next
-    	onebefore_removenode.next = oneafter_removenode
-    	onebefore_removenode = self.head
+# I think the time complexity of the above methods are O(n). 
+    	
 
 
   
