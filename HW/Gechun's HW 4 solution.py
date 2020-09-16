@@ -150,7 +150,6 @@ plt.plot(x, y_selection_mean, label = 'selection sort')
 plt.plot(x, y_heap_mean, label = 'Heap sort')
 # Add a legend
 plt.legend(loc='upper left', ncol=2, shadow=True, fancybox=True)
-#plt.legend(['selection sort, 'heap sort'], loc = "upper left", prop = {"size":10})
 # y label
 plt.ylabel("Average runnig time: microseconds")
 # x label
