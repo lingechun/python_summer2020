@@ -66,8 +66,13 @@ class LinkedList:
     def removeNode(self, node_to_remove):
     	onebefore_removenode = self.head # find the node before removenode from the head of the list
     	# There are two situations that we can't find the one before removenode
-    	if onebefore_removenode == None: #(1) the list is empty
+    	if self.head == None: #(1) the list is empty
     	    print('The list is empty.')
+    	elif self.head.value == node_to_remove.value:
+    		nextone = self.head.next
+    		self.head.value = nextone.value
+    		self.head.next = nextone.next
+
     	else:
     		try: 
     			while(onebefore_removenode.next.value != node_to_remove.value):
@@ -79,11 +84,29 @@ class LinkedList:
     		    print('The list is not empty and the node_to_remove is not in the list.')
     
     def removeNodesByValue(self, value):	
-    	removenode = self.head
     	# check if the list is empty
     	if self.head == None:
     		print('The list is empty.')
+    	elif self.head.value == value: #when the first node is the node to remove
+    		nextone = self.head.next
+    		self.head.value = nextone.value #remove the first node
+    		self.head.next = nextone.next
+    		removenode = self.head # continue to check if there are still nodes to remove
+    		try:
+    	        while(removenode.value != value): # find the nodes to remove until the end of the list
+    		        removenode = removenode.next # go to next one if this one does not have the specified value
+    		        if removenode.value == value: 
+    		            if removenode.next == None: # make sure if it is the last node in the list
+    		        	    removenode.value == None # if is the last node, just remove it and end the function
+    		        	    break
+    		            else:
+    			            nextone = removenode.next # if it is not the last node
+    	                    removenode.value = nextone.value # remove the node and continue to check next one
+    	                    removenode.next = nextone.next
+            except AttributeError: 
+            	pass
     	else:
+    		removenode = self.head
     	    try:
     	        while(removenode.value != value): # find the nodes to remove until the end of the list
     		        removenode = removenode.next # go to next one if this one does not have the specified value
@@ -149,6 +172,8 @@ list.removeNode(Node(7))
 list.removeNode(Node(3))
 # remove node that does not exist
 list.removeNodesByValue(9)
+# remove the node with value 0, which is the first node in the list
+list.removeNodesByValue(0)
 
 # Seem only can remove one node with the specified value
 # Please help: don't understand why the while-if loop does not work properly
